@@ -75,9 +75,8 @@ class NumPairAPITests(APITestCase):
         url = reverse('test-list')
 
         response = self.client.get(url, format='json')
-
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(len(response.data), self.count_before)
+        self.assertEqual(len(response.data['results']), self.count_before)
 
     def test_retrieve_action(self):
         """
