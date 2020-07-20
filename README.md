@@ -37,9 +37,7 @@ README
 
 ##### Установка
 
-* `sudo pip install fabric<2.0`
-
-**Примечание**: важно устанавливать именно первую версию fabric.
+* `sudo pip install Fabric3`
 
 ##### Команды fabric
 
