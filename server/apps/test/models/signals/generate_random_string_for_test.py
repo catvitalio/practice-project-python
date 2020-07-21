@@ -7,5 +7,4 @@ from apps.test.models import Test
 
 @receiver(pre_save, sender=Test)
 def generate_random_string(sender, instance, **kwargs):
-    if instance.random_string:
-        instance.random_string = get_random_string(length=32)
+    instance.random_string = get_random_string(length=32)
