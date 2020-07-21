@@ -7,3 +7,4 @@ class TestSerializer(ModelSerializer):
     class Meta:
         model = Test
         fields = '__all__'
+        read_only_fields = ('random_string', )
