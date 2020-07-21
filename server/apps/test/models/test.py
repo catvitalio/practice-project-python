@@ -17,5 +17,6 @@ class Test(models.Model):
         return self.name
 
     class Meta:
+        ordering = ['id']
         verbose_name = 'Тест'
         verbose_name_plural = 'Тест'
