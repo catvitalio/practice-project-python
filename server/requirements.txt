@@ -11,3 +11,5 @@ django-debug-toolbar==2.2 # панель для отладки запросов 
 Pillow==7.2.0 # для работы с изображениями
 djangorestframework==3.11.0 # API
 django-url-filter==0.3.15 # улучшенные фильтры для DRF
+
+yandex-geocoder==2.0.0 # для нахождения координат
