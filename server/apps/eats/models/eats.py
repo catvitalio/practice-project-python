@@ -11,8 +11,6 @@ class Place(models.Model):
         User,
         on_delete=models.CASCADE,
         verbose_name='Владелец',
-        blank=True,
-        null=True,
     )
     photo = models.ImageField(
         upload_to='places/',
@@ -23,30 +21,33 @@ class Place(models.Model):
         max_length=255,
         verbose_name='Адрес заведения',
     )
-    open = models.TimeField(
+    open_time = models.TimeField(
         verbose_name='Время открытия',
         blank=True,
         null=True,
     )
-    close = models.TimeField(
+    close_time = models.TimeField(
         verbose_name='Время закрытия',
         blank=True,
         null=True,
     )
-    latitude = models.FloatField(
+    latitude = models.DecimalField(
+        max_digits=10,
+        decimal_places=7,
         verbose_name='Координаты (широта)',
         blank=True,
         null=True,
     )
-    longitude = models.FloatField(
+    longitude = models.DecimalField(
+        max_digits=10,
+        decimal_places=7,
         verbose_name='Координаты (долгота)',
         blank=True,
         null=True,
     )
     average_cost = models.FloatField(
         verbose_name='Средняя стоимость блюд',
-        blank=True,
-        null=True,
+        default=0,
     )
 
     def __str__(self):
