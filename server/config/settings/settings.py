@@ -9,6 +9,7 @@ ROOT_URLCONF = 'config.urls'
 WSGI_APPLICATION = 'config.wsgi.application'
 ALLOWED_HOSTS = ['*']
 SITE_ID = 1
+GEO_API_KEY = os.getenv('GEO_API_KEY')
 
 ##################################################################
 # Debug settings (with docker)

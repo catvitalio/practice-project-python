@@ -1,0 +1,1 @@
+from .eats import PlaceViewSet
