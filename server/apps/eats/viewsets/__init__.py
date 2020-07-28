@@ -1,1 +1,1 @@
-from .eats import PlaceViewSet
+from .eats import *

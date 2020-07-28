@@ -57,3 +57,58 @@ class Place(models.Model):
         ordering = ['id']
         verbose_name = 'Заведение'
         verbose_name_plural = 'Заведение'
+
+
+class Ingredient(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название ингредиента',
+    )
+    calories = models.IntegerField(
+        verbose_name='Калорийность ингредиента (ккал)',
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Ингредиент'
+        verbose_name_plural = 'Ингредиент'
+
+
+class Dish(models.Model):
+    name = models.CharField(
+        max_length=255,
+        verbose_name='Название блюда',
+    )
+    photo = models.ImageField(
+        upload_to='dishes/',
+        verbose_name='Фотография блюда',
+        blank=True,
+    )
+    calories = models.IntegerField(
+        verbose_name='Суммарная калорийность (ккал)',
+        blank=True,
+        null=True,
+    )
+    cost = models.FloatField(
+        verbose_name='Стоимость блюда',
+    )
+    ingredients = models.ManyToManyField(
+        Ingredient,
+        verbose_name='Ингредиенты',
+    )
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        verbose_name='Заведение блюда'
+    )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['id']
+        verbose_name = 'Блюдо'
+        verbose_name_plural = 'Блюдо'
