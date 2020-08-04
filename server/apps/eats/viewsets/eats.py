@@ -2,6 +2,7 @@ from rest_framework.viewsets import ModelViewSet
 from rest_framework.viewsets import GenericViewSet
 from rest_framework.mixins import ListModelMixin
 from rest_framework.mixins import RetrieveModelMixin
+from url_filter.integrations.drf import DjangoFilterBackend
 
 from apps.eats.models import Place
 from apps.eats.models import Ingredient
@@ -14,21 +15,23 @@ from apps.eats.serializers import DishSerializer
 class PlaceViewSet(ModelViewSet):
     queryset = Place.objects.all()
     serializer_class = PlaceSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['name', 'owner', 'open_time', 'close_time', 'longitude', 'latitude']
 
 
-class IngredientViewSet(ListModelMixin,
-                        RetrieveModelMixin,
-                        GenericViewSet):
+class IngredientViewSet(
+    ListModelMixin,
+    RetrieveModelMixin,
+    GenericViewSet
+):
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['name', 'calories']
 
 
 class DishViewSet(ModelViewSet):
+    queryset = Dish.objects.all()
     serializer_class = DishSerializer
-
-    def get_queryset(self):
-        queryset = Dish.objects.all()
-        place = self.request.query_params.get('place', None)
-        if place is not None:
-            queryset = queryset.filter(place_id=place)
-        return queryset
+    filter_backends = [DjangoFilterBackend]
+    filter_fields = ['name', 'calories', 'place', 'cost', 'ingredients']
