@@ -11,3 +11,4 @@
 *.7z
 /pg_data
 *.env
+*.csv

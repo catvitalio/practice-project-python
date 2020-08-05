@@ -8,8 +8,8 @@ class UserSerializer(ModelSerializer):
     token = SerializerMethodField()
 
     def get_token(self, instance):
-        token = Token.objects.get(user=instance).key
-        return token
+        self.token = Token.objects.get(user=instance).key
+        return self.token
 
     class Meta:
         model = User

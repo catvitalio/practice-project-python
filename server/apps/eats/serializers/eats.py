@@ -4,6 +4,8 @@ from rest_framework.serializers import ModelSerializer
 from rest_framework.serializers import PrimaryKeyRelatedField
 
 from apps.eats.models import Place
+from apps.eats.models import Ingredient
+from apps.eats.models import Dish
 
 
 class PlaceSerializer(ModelSerializer):
@@ -14,4 +16,16 @@ class PlaceSerializer(ModelSerializer):
 
     class Meta:
         model = Place
+        fields = '__all__'
+
+
+class IngredientSerializer(ModelSerializer):
+    class Meta:
+        model = Ingredient
+        fields = '__all__'
+
+
+class DishSerializer(ModelSerializer):
+    class Meta:
+        model = Dish
         fields = '__all__'
