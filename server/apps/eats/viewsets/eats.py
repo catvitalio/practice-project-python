@@ -1,15 +1,13 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.viewsets import GenericViewSet
-from rest_framework.mixins import ListModelMixin
-from rest_framework.mixins import RetrieveModelMixin
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from url_filter.integrations.drf import DjangoFilterBackend
 
-from apps.eats.models import Place
-from apps.eats.models import Ingredient
-from apps.eats.models import Dish
+from apps.eats.models import Place, Ingredient, Dish
 from apps.eats.serializers import PlaceSerializer
 from apps.eats.serializers import IngredientSerializer
 from apps.eats.serializers import DishSerializer
+from apps.main.permissions import PlacePermission, DishPermission
 
 
 class PlaceViewSet(ModelViewSet):
@@ -17,6 +15,7 @@ class PlaceViewSet(ModelViewSet):
     serializer_class = PlaceSerializer
     filter_backends = [DjangoFilterBackend]
     filter_fields = ['name', 'owner', 'open_time', 'close_time', 'longitude', 'latitude']
+    permission_classes = [PlacePermission]
 
 
 class IngredientViewSet(
@@ -28,6 +27,7 @@ class IngredientViewSet(
     serializer_class = IngredientSerializer
     filter_backends = [DjangoFilterBackend]
     filter_fields = ['name', 'calories']
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 
 class DishViewSet(ModelViewSet):
@@ -35,3 +35,4 @@ class DishViewSet(ModelViewSet):
     serializer_class = DishSerializer
     filter_backends = [DjangoFilterBackend]
     filter_fields = ['name', 'calories', 'place', 'cost', 'ingredients']
+    permission_classes = [DishPermission]
