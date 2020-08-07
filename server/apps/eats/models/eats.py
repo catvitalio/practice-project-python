@@ -1,13 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.db.models import Avg, Sum
-
-
-class PlaceManager(models.Manager):
-    def with_avg_cost(self, place_id):
-        avg_cost = Dish.objects.filter(
-            place__id__exact=place_id).aggregate(Avg('cost'))
-        return avg_cost['cost__avg']
 
 
 class Place(models.Model):
@@ -60,7 +52,6 @@ class Place(models.Model):
         blank=True,
         null=True,
     )
-    objects = PlaceManager()
 
     def __str__(self):
         return self.name
@@ -87,13 +78,6 @@ class Ingredient(models.Model):
         ordering = ['id']
         verbose_name = 'Ингредиент'
         verbose_name_plural = 'Ингредиенты'
-
-
-class DishManager(models.Manager):
-    def with_sum_calories(self, dish_id):
-        sum_calories = Ingredient.objects.filter(
-            dish__id__exact=dish_id).aggregate(Sum('calories'))
-        return sum_calories['calories__sum']
 
 
 class Dish(models.Model):
@@ -125,7 +109,6 @@ class Dish(models.Model):
         on_delete=models.CASCADE,
         verbose_name='Заведение блюда'
     )
-    objects = DishManager()
 
     def __str__(self):
         return self.name
