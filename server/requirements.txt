@@ -13,3 +13,4 @@ djangorestframework==3.11.0 # API
 django-url-filter==0.3.15 # улучшенные фильтры для DRF
 
 yandex-geocoder==2.0.0 # для нахождения координат
+drf-yasg==1.17.1 # документация
