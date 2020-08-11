@@ -1,7 +1,7 @@
 from django.utils.decorators import method_decorator
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin
 from url_filter.integrations.drf import DjangoFilterBackend
 
 from apps.eats.models import Place, Ingredient, Dish
@@ -34,14 +34,17 @@ class PlaceViewSet(ModelViewSet):
 
 
 @method_decorator(name='retrieve', decorator=id_field)
+@method_decorator(name='create', decorator=token_field)
 class IngredientViewSet(
     ListModelMixin,
     RetrieveModelMixin,
+    CreateModelMixin,
     GenericViewSet
 ):
     """
     list: Возврат списка всех ингредиентов
     retrieve: Возврат ингредиента по id
+    create: Создание нового ингредиента
     """
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer
