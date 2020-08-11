@@ -34,17 +34,14 @@ class PlaceViewSet(ModelViewSet):
 
 
 @method_decorator(name='retrieve', decorator=id_field)
-@method_decorator(name='create', decorator=token_field)
 class IngredientViewSet(
     ListModelMixin,
     RetrieveModelMixin,
-    CreateModelMixin,
     GenericViewSet
 ):
     """
     list: Возврат списка всех ингредиентов
     retrieve: Возврат ингредиента по id
-    create: Создание нового ингредиента
     """
     queryset = Ingredient.objects.all()
     serializer_class = IngredientSerializer

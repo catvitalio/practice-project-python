@@ -27,6 +27,8 @@ class DishPermission(permissions.BasePermission):
                 return request.user == owner
             except ObjectDoesNotExist:
                 raise APIException("Выбранного заведения нет в списке")
+            except KeyError:
+                raise APIException("Заведение не выбрано")
 
         return (
                 request.method in permissions.SAFE_METHODS or
