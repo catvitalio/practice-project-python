@@ -11,10 +11,12 @@ services:
             - 8000:8000
         depends_on:
             - db
+            - redis
         environment:
             DEBUG: 'True'
             DATABASE_URL: 'postgres://postgres:@db:5432/postgres'
             BROKER_URL: 'amqp://user:password@rabbitmq:5672/my_vhost'
+            REDIS_URL: 'redis://redis:6379/0'
         env_file:
             - .api-keys.env
 
@@ -23,3 +25,6 @@ services:
         environment:
             POSTGRES_DB: postgres
             POSTGRES_USER: postgres
+
+    redis:
+        image: redis:6.0.6

@@ -24,6 +24,19 @@ DEBUG = os.environ.get('DEBUG', 'True') == 'True'
 DATABASES = {'default': dj_database_url.config()}
 
 ##################################################################
+# Caches settings (with docker)
+##################################################################
+
+CACHE_TTL = 60 * 15
+
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": os.getenv('REDIS_URL'),
+    }
+}
+
+##################################################################
 # Logging settings
 ##################################################################
 

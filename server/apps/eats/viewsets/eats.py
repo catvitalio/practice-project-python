@@ -1,7 +1,9 @@
+from django.conf import settings
 from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
 from url_filter.integrations.drf import DjangoFilterBackend
 
 from apps.eats.models import Place, Ingredient, Dish
@@ -17,6 +19,8 @@ from .swagger_fields import id_field, token_field, token_id_field
 @method_decorator(name='update', decorator=token_id_field)
 @method_decorator(name='partial_update', decorator=token_id_field)
 @method_decorator(name='destroy', decorator=token_id_field)
+@method_decorator(name='list', decorator=cache_page(settings.CACHE_TTL))
+@method_decorator(name='retrieve', decorator=cache_page(settings.CACHE_TTL))
 class PlaceViewSet(ModelViewSet):
     """
     list: Возврат списка всех заведений
@@ -34,6 +38,8 @@ class PlaceViewSet(ModelViewSet):
 
 
 @method_decorator(name='retrieve', decorator=id_field)
+@method_decorator(name='list', decorator=cache_page(settings.CACHE_TTL))
+@method_decorator(name='retrieve', decorator=cache_page(settings.CACHE_TTL))
 class IngredientViewSet(
     ListModelMixin,
     RetrieveModelMixin,
@@ -55,6 +61,8 @@ class IngredientViewSet(
 @method_decorator(name='update', decorator=token_id_field)
 @method_decorator(name='partial_update', decorator=token_id_field)
 @method_decorator(name='destroy', decorator=token_id_field)
+@method_decorator(name='list', decorator=cache_page(settings.CACHE_TTL))
+@method_decorator(name='retrieve', decorator=cache_page(settings.CACHE_TTL))
 class DishViewSet(ModelViewSet):
     """
     list: Возврат списка всех блюд
