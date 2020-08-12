@@ -1,7 +1,7 @@
 from django.utils.decorators import method_decorator
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin
 from url_filter.integrations.drf import DjangoFilterBackend
 
 from apps.eats.models import Place, Ingredient, Dish
