@@ -29,7 +29,7 @@ class IngredientTest(APITestCase):
 
     def test_retrieve_ingredient(self):
         """
-        Test LIST works without authorization
+        Test GET (retrieve) works without authorization
         """
         url = reverse('ingredients-detail', args=(self.ingredient.id, ))
 
@@ -128,7 +128,7 @@ class PlaceTests(APITestCase):
 
     def test_retrieve_place(self):
         """
-        Test LIST works without authorization
+        Test GET (retrieve) works without authorization
         """
         url = reverse('places-detail', args=(self.place.id, ))
 
@@ -257,7 +257,7 @@ class DishTests(APITestCase):
 
     def test_retrieve_dish(self):
         """
-        Test LIST works without authorization
+        Test GET (retrieve) works without authorization
         """
         url = reverse('dishes-detail', args=(self.dish.id, ))
 
